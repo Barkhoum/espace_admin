@@ -1,3 +1,23 @@
+<?php
+session_start();
+if (isset($_POST['valider'])) {
+        if (!empty($_POST['login']) and !empty($_POST['psw'])) {
+        $login_admin ="admin";
+        $psw_admin ="admin1234";
+
+        $login_saisi = htmlspecialchars($_POST['login']);
+        $psw_saisi = htmlspecialchars($_POST['psw']);
+        if($login_saisi == $login_admin AND $psw_saisi ==$psw_admin){
+            $_SESSION['psw'] = $psw_saisi;
+            header('Location: index.php');
+        }else{
+            echo "Votre mot de passe ou pseudo est incorrect";
+        }
+    }else {
+        echo "Veuillez completer tous les champs !";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -37,9 +57,11 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" value="Inscription" class="m-3 btn btn-primary mx-5 px-5" name="5">
+                    <input type="submit" value="valider" class="m-3 btn btn-primary mx-5 px-5" name="valider">
                 </td>
+
             </tr>
+
         </form>
     </section>
 </body>
